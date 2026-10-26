@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+- `StatDefinition` and `ModifierDefinition` implement Core's `IAuthoredDefinition`. Findings: `modifiers.stat-name-empty`, `modifiers.modifier-name-empty`, `modifiers.contributions-empty`, `modifiers.contribution-null`, `modifiers.contribution-invalid`.
+- `StatDefinitionPreviewer` and `ModifierDefinitionPreviewer` show a summary, the icon and one line per contribution in Core's authoring tools.
+
 ## [0.2.5] - 2026-09-07
 
 ### Changed
