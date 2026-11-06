@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+- `StatData` implements `IInstanceData` from the WorldObjects package (`Spellbound.WorldObjects`): `Empty()`, `RaiseChanged(in InstanceView, IInstancePresenter)` and `RaiseResolve(InstanceWriter, in InstanceView)` replace `GetEmptyData`, `InvokeChangeCallback` and `InvokeResolveCallback`, and the runtime assembly references `Spellbound.WorldObjects` in place of `Spellbound.Core.WorldObjects`. The packed bytes are unchanged.
+- `StatChangeReason` holds the change reasons (`Silent`, `ResourcesGained`, `ResourcesLost`, `ResourcesUnchanged`, `Died`) with the same values.
+- A project that installs Modifiers now installs WorldObjects beside it (`https://github.com/Spellbound-Studios/WorldObjects.git?path=/Packages/WorldObjects#beta`) and the Core WorldObjects needs, 1.1.9 or newer and below 3.0.0 (`https://github.com/Spellbound-Studios/Core.git?path=/Packages/Core#dev`), on Unity 6000.3 or newer, the floor WorldObjects declares.
+
+### Removed
+- `StatData.Context`. Use `StatChangeReason`.
+
 ## [0.2.5] - 2026-09-07
 
 ### Changed

@@ -3,31 +3,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Spellbound.Core;
-using Spellbound.Core.ObjectData;
-using Spellbound.Core.ObjectHandling;
-using Spellbound.Core.Objects;
 using Spellbound.Core.Packing;
+using Spellbound.WorldObjects;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// The data that belongs to a stat container. It is intended to represent all of the networkable and savable
-    /// data per container instance.
-    /// </summary>
     [PackerId("stat_data")]
-    public struct StatData : IPackerObjectData {
-        public List<ResourceData> resourceData; // Stat max, min, current
+    public struct StatData : IInstanceData {
+        public List<ResourceData> resourceData;
         public List<RolledModifier> modifiers;
         public List<TimedModifier> buffs;
         public List<TimedModifier> debuffs;
-
-        public static class Context {
-            public const byte Silent = 0;
-            public const byte ResourcesGained = 1;
-            public const byte ResourcesLost = 2;
-            public const byte ResourcesUnchanged = 3;
-            public const byte Died = 4;
-        }
 
         #region Hydration
 
@@ -68,21 +53,17 @@ namespace Spellbound.Modifiers {
 
         #endregion Hydration
 
-        #region IPackerObjectData
+        #region IInstanceData
 
-        public IPackerObjectData GetEmptyData() => new StatData();
+        public IInstanceData Empty() => new StatData();
 
-        public void InvokeChangeCallback(
-            byte context, ObjectParent parent, int instanceIndex, ObjectPreset preset, byte surfaceIndex,
-            TransformData transformData) =>
-                this.ChangeCallback(context, parent, instanceIndex, preset, surfaceIndex, transformData);
+        public void RaiseChanged(in InstanceView view, IInstancePresenter presenter) =>
+                this.RaiseChangedTo(in view, presenter);
 
-        public void InvokeResolveCallback(
-            byte context, ObjectParent parent, int instanceIndex, ObjectPreset preset, byte surfaceIndex,
-            TransformData transformData) =>
-                this.ResolveCallback(context, parent, instanceIndex, preset, surfaceIndex, transformData);
+        public void RaiseResolve(InstanceWriter writer, in InstanceView view) =>
+                this.RaiseResolveTo(writer, in view);
 
-        #endregion IPackerObjectData
+        #endregion IInstanceData
 
         #region IPacker
 
@@ -144,37 +125,21 @@ namespace Spellbound.Modifiers {
 
         #region Queries
 
-        private const int CountPrefixBytes = sizeof(int);                   // length prefix per list
-        private const int ResourceBytes = sizeof(uint) + 3 * sizeof(float); // statHash + max + min + current
+        private const int CountPrefixBytes = sizeof(int);
+        private const int ResourceBytes = sizeof(uint) + 3 * sizeof(float);
 
-        /// <summary>
-        /// Number of resource entries.
-        /// </summary>
         public int ResourceCount => resourceData?.Count ?? 0;
 
-        /// <summary>
-        /// Number of rolled modifier entries.
-        /// </summary>
         public int ModifierCount => modifiers?.Count ?? 0;
 
         public int BuffCount => buffs?.Count ?? 0;
 
         public int DebuffCount => debuffs?.Count ?? 0;
 
-        /// <summary>
-        /// Total number of packed entries across all lists.
-        /// </summary>
         public int Count => ResourceCount + ModifierCount + BuffCount + DebuffCount;
 
-        /// <summary>
-        /// True when there is no data to pack on any list.
-        /// </summary>
         public bool IsEmpty => Count == 0;
 
-        /// <summary>
-        /// Exact size in bytes this struct will occupy once packed, computed without allocating. Mirrors the
-        /// layout written by <see cref="Pack"/>; keep the two in sync if either list's element shape changes.
-        /// </summary>
         public int PackedSize {
             get {
                 var size = 4 * CountPrefixBytes + ResourceCount * ResourceBytes;

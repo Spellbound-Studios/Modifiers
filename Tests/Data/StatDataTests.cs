@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Spellbound.Core.Packing;
 
 namespace Spellbound.Modifiers.Tests {
     public class StatDataTests {
@@ -10,6 +11,47 @@ namespace Spellbound.Modifiers.Tests {
 
         private static RolledModifier RollThickHide(uint sourceId, int seed = 7) =>
                 ModifierRegistry.GetDefinition("sample_thick_hide").Roll(new Random(seed), sourceId);
+
+        private const string FixedStatDataBytes =
+                "C08C3D2D01000000443322110000C8420000000000007A42010000000900000003000000010000000D0C0B0A0000904001"
+                + "0000001500000005000000000000000000A0400000204000000000";
+
+        [Test]
+        public void Pack_FixedStatData_MatchesTheRecordedBytes() {
+            var data = new StatData {
+                resourceData = new List<ResourceData> { new(0x11223344u, 100f, 0f, 62.5f) },
+                modifiers = new List<RolledModifier> {
+                    new() {
+                        modifierHash = 9u, sourceId = 3u,
+                        baked = new[] { new BakedRoll { statHash = 0x0A0B0C0Du, value = 4.5f } }
+                    }
+                },
+                buffs = new List<TimedModifier> {
+                    new() {
+                        modifier = new RolledModifier
+                                { modifierHash = 21u, sourceId = 5u, baked = Array.Empty<BakedRoll>() },
+                        duration = 5f, remaining = 2.5f
+                    }
+                }
+            };
+
+            var bytes = new byte[256];
+            Span<byte> buffer = bytes;
+            Packer.WriteUInt(ref buffer, data.Hash);
+            data.Pack(ref buffer);
+            var written = BitConverter.ToString(bytes, 0, bytes.Length - buffer.Length);
+
+            Assert.AreEqual(FixedStatDataBytes, written.Replace("-", string.Empty));
+        }
+
+        [Test]
+        public void StatChangeReason_KeepsTheReasonValues() {
+            Assert.AreEqual(0, StatChangeReason.Silent);
+            Assert.AreEqual(1, StatChangeReason.ResourcesGained);
+            Assert.AreEqual(2, StatChangeReason.ResourcesLost);
+            Assert.AreEqual(3, StatChangeReason.ResourcesUnchanged);
+            Assert.AreEqual(4, StatChangeReason.Died);
+        }
 
         [Test]
         public void PackedSize_Empty_MatchesWrittenBytes() {

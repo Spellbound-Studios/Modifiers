@@ -4,17 +4,16 @@ A Unity library for games where everything can be modified. An entity exposes st
 
 ## Installation
 
-Requires Unity 6000.0+ and [Spellbound.Core](https://github.com/Spell-Bound-Studios/Core) 1.1.0 or newer — UPM cannot resolve git-to-git dependencies, so Core must be added to the project alongside this package. Add both to `Packages/manifest.json`:
+Requires Unity 6000.3 or newer (the floor WorldObjects declares), [Spellbound.WorldObjects](https://github.com/Spellbound-Studios/WorldObjects) and the [Spellbound.Core](https://github.com/Spellbound-Studios/Core) that WorldObjects needs, 1.1.9 or newer and below 3.0.0. UPM cannot resolve git-to-git dependencies, so Core and WorldObjects must be added to the project alongside this package. Add all three to `Packages/manifest.json`:
 
 ```json
 {
   "dependencies": {
-    "com.spellboundstudios.core": "git@github.com:Spell-Bound-Studios/Core.git#dev",
+    "com.spellboundstudios.core": "https://github.com/Spellbound-Studios/Core.git?path=/Packages/Core#dev",
+    "com.spellboundstudios.worldobjects": "https://github.com/Spellbound-Studios/WorldObjects.git?path=/Packages/WorldObjects#beta",
     "com.spellboundstudios.modifiers": "git@github.com:Spell-Bound-Studios/Modifiers.git"
   }
 }
 ```
-
-Drop `#dev` once Core 1.1.0 lands on its main branch.
 
 Or via **Window → Package Manager → + → Add package from git URL** using the same URLs. A playable combat demo lives in `Samples/`, and `CHANGELOG.md` tracks the API.
