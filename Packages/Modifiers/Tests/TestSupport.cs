@@ -92,7 +92,7 @@ namespace Spellbound.Modifiers.Tests {
             return contribution;
         }
 
-        private static void SetField(object target, string name, object value) =>
+        internal static void SetField(object target, string name, object value) =>
                 target.GetType().GetField(name, BindingFlags.NonPublic | BindingFlags.Instance).SetValue(target, value);
 
         public static ModifierTable CreateTable(params (ModifierDefinition candidate, int weight)[] entries) =>

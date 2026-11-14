@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+- `StatDefinition` and `ModifierDefinition` implement Core's `IAuthoredDefinition`. Findings: `modifiers.stat-name-empty`, `modifiers.modifier-name-empty`, `modifiers.contributions-empty`, `modifiers.contribution-null`, `modifiers.contribution-invalid`.
+- `StatDefinitionPreviewer` and `ModifierDefinitionPreviewer` show a summary, the icon and one line per contribution in Core's authoring tools.
+
 ### Changed
 - `StatData` implements `IInstanceData` from the WorldObjects package (`Spellbound.WorldObjects`): `Empty()`, `RaiseChanged(in InstanceView, IInstancePresenter)` and `RaiseResolve(InstanceWriter, in InstanceView)` replace `GetEmptyData`, `InvokeChangeCallback` and `InvokeResolveCallback`, and the runtime assembly references `Spellbound.WorldObjects` in place of `Spellbound.Core.WorldObjects`. The packed bytes are unchanged.
 - `StatChangeReason` holds the change reasons (`Silent`, `ResourcesGained`, `ResourcesLost`, `ResourcesUnchanged`, `Died`) with the same values.
