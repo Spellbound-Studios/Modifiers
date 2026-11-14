@@ -1,0 +1,20 @@
+{
+    "name": "Spellbound.Modifiers.Editor",
+    "rootNamespace": "Spellbound.Modifiers.Editor",
+    "references": [
+        "GUID:7cf2c2f5768d84d459fa425567ae5e6a",
+        "GUID:1f4239feb2806a34fbb5696f11af43f5",
+        "GUID:c14a5db03514b8d4ba10b621ed3627d5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

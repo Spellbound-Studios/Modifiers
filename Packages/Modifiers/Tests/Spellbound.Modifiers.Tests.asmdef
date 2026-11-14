@@ -1,0 +1,28 @@
+{
+  "name": "Spellbound.Modifiers.Tests",
+  "rootNamespace": "",
+  "references": [
+    "Spellbound.Modifiers",
+    "Spellbound.Modifiers.Editor",
+    "GUID:1f4239feb2806a34fbb5696f11af43f5",
+    "GUID:c14a5db03514b8d4ba10b621ed3627d5",
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner",
+    "Unity.PerformanceTesting"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "nunit.framework.dll"
+  ],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

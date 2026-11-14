@@ -1,0 +1,19 @@
+{
+  "name": "com.spellboundstudios.modifiers",
+  "version": "0.2.5",
+  "displayName": "Spellbound.Modifiers",
+  "description": "Spellbound Modifier system.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Spellbound Studios",
+    "email": "Judsin1349@gmail.com",
+    "url": "https://github.com/Spellbound-Studios/Modifiers"
+  },
+  "dependencies": {},
+  "keywords": [
+    "modifiers",
+    "stats",
+    "affixes",
+    "rolls"
+  ]
+}
