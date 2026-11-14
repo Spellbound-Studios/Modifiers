@@ -11,7 +11,7 @@ Requires Unity 6000.3 or newer (the floor WorldObjects declares), [Spellbound.Wo
   "dependencies": {
     "com.spellboundstudios.core": "https://github.com/Spellbound-Studios/Core.git?path=/Packages/Core#dev",
     "com.spellboundstudios.worldobjects": "https://github.com/Spellbound-Studios/WorldObjects.git?path=/Packages/WorldObjects#beta",
-    "com.spellboundstudios.modifiers": "git@github.com:Spell-Bound-Studios/Modifiers.git"
+    "com.spellboundstudios.modifiers": "https://github.com/Spellbound-Studios/Modifiers.git?path=/Packages/Modifiers#main"
   }
 }
 ```
