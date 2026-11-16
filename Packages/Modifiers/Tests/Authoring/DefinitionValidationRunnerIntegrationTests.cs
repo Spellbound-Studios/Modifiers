@@ -10,7 +10,7 @@ namespace Spellbound.Modifiers.Tests {
             var definition = Definitions.Create(Definitions.Range(stat, ContributionType.Flat, 1, 1));
             var run = new DefinitionValidationRunner().ValidateAsset(definition);
 
-            Assert.AreEqual(new[] { "ModifierDefinition (Modifiers)" }, run.OwnValidations);
+            Assert.AreEqual(new[] { PackageLabel.OwnValidation(typeof(ModifierDefinition)) }, run.OwnValidations);
             Assert.AreEqual("modifiers.modifier-name-empty", run.Report.Findings[0].Code);
         }
     }

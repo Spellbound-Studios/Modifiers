@@ -6,7 +6,7 @@ using System.Text;
 using Spellbound.Core.Packing;
 using Spellbound.WorldObjects;
 
-namespace Spellbound.Modifiers {
+namespace Spellbound.Modifiers.WorldObjects {
     [PackerId("stat_data")]
     public struct StatData : IInstanceData {
         public List<ResourceData> resourceData;

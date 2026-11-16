@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Spellbound.Core.Packing;
+using Spellbound.Modifiers.WorldObjects;
 
 namespace Spellbound.Modifiers.Tests {
     public class StatDataTests {
-        private static StatId Armor => new(StatRegistry.GetHash("sample_armor"));
+        private static StatId Armor => new(StatRegistry.GetHash("test_armor"));
 
         private static RolledModifier RollThickHide(uint sourceId, int seed = 7) =>
-                ModifierRegistry.GetDefinition("sample_thick_hide").Roll(new Random(seed), sourceId);
+                ModifierRegistry.GetDefinition("test_thick_hide").Roll(new Random(seed), sourceId);
 
         private const string FixedStatDataBytes =
                 "C08C3D2D01000000443322110000C8420000000000007A42010000000900000003000000010000000D0C0B0A0000904001"
@@ -69,7 +70,7 @@ namespace Spellbound.Modifiers.Tests {
 
             var data = new StatData {
                 resourceData = new List<ResourceData> {
-                    new(StatRegistry.GetHash("sample_health"), 100f, 0f, 62.5f)
+                    new(StatRegistry.GetHash("test_health"), 100f, 0f, 62.5f)
                 },
                 modifiers = new List<RolledModifier> { rolled },
                 buffs = new List<TimedModifier> {

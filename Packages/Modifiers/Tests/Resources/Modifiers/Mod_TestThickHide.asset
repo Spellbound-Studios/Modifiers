@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d6311429f1fda449e97fb960ee9a47, type: 3}
+  m_Name: Mod_TestThickHide
+  m_EditorClassIdentifier: 
+  guid: 6acaf18abfd54ec4d8d37b9e990787d3
+  hash: 2286307272
+  modifierName: test_thick_hide
+  displayName: Thick Hide
+  description: +8-15 armor
+  icon: {fileID: 0}
+  contributions:
+  - rid: 1000
+  references:
+    version: 2
+    RefIds:
+    - rid: 1000
+      type: {class: SingleStatContribution, ns: Spellbound.Modifiers, asm: Spellbound.Modifiers}
+      data:
+        stat: {fileID: 11400000, guid: 04bf5d64f80d1be47b6dd58f99b5c6a9, type: 2}
+        contributionType: 0
+        amount:
+          rid: 1001
+    - rid: 1001
+      type: {class: RolledMagnitude, ns: Spellbound.Modifiers, asm: Spellbound.Modifiers}
+      data:
+        min: 8
+        max: 15
+        step: 1

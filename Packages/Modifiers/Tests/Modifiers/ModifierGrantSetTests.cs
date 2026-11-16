@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace Spellbound.Modifiers.Tests {
     public class ModifierGrantSetTests {
-        private static StatId Armor => new(StatRegistry.GetHash("sample_armor"));
-        private static StatId Health => new(StatRegistry.GetHash("sample_health"));
+        private static StatId Armor => new(StatRegistry.GetHash("test_armor"));
+        private static StatId Health => new(StatRegistry.GetHash("test_health"));
 
-        private static StatDefinition ArmorDef => StatRegistry.GetDefinition("sample_armor");
-        private static StatDefinition HealthDef => StatRegistry.GetDefinition("sample_health");
+        private static StatDefinition ArmorDef => StatRegistry.GetDefinition("test_armor");
+        private static StatDefinition HealthDef => StatRegistry.GetDefinition("test_health");
 
         [Test]
         public void Inline_FixedValue_Applies() {
@@ -115,8 +115,10 @@ namespace Spellbound.Modifiers.Tests {
         public void Band_FixedPairInverted_KeepOrderedIsInvalid() {
             var inverted = Definitions.Band(ArmorDef, Definitions.Fixed(19f), HealthDef, Definitions.Fixed(11f));
 
+            var ordered = Definitions.Band(ArmorDef, Definitions.Fixed(11f), HealthDef, Definitions.Fixed(19f));
+
             Assert.IsFalse(inverted.IsValid);
-            Assert.IsTrue(Definitions.Band(ArmorDef, Definitions.Fixed(11f), HealthDef, Definitions.Fixed(19f)).IsValid);
+            Assert.IsTrue(ordered.IsValid);
         }
 
         [Test]

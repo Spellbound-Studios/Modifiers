@@ -5,11 +5,16 @@
 ### Added
 - `StatDefinition` and `ModifierDefinition` implement Core's `IAuthoredDefinition`. Findings: `modifiers.stat-name-empty`, `modifiers.modifier-name-empty`, `modifiers.contributions-empty`, `modifiers.contribution-null`, `modifiers.contribution-invalid`.
 - `StatDefinitionPreviewer` and `ModifierDefinitionPreviewer` show a summary, the icon and one line per contribution in Core's authoring tools.
+- `ResourcePool`: a current value under a `Modifiable`'s value of one stat, clamped to `[Min, Max]` and clamped again when the owner's value of the stat changes. `Changed` and `Depleted` pass the pool; `Depleted` fires once each time the value reaches `Min`. `Dispose` stops listening to the owner.
 
 ### Changed
 - `StatData` implements `IInstanceData` from the WorldObjects package (`Spellbound.WorldObjects`): `Empty()`, `RaiseChanged(in InstanceView, IInstancePresenter)` and `RaiseResolve(InstanceWriter, in InstanceView)` replace `GetEmptyData`, `InvokeChangeCallback` and `InvokeResolveCallback`, and the runtime assembly references `Spellbound.WorldObjects` in place of `Spellbound.Core.WorldObjects`. The packed bytes are unchanged.
 - `StatChangeReason` holds the change reasons (`Silent`, `ResourcesGained`, `ResourcesLost`, `ResourcesUnchanged`, `Died`) with the same values.
-- A project that installs Modifiers now installs WorldObjects beside it (`https://github.com/Spellbound-Studios/WorldObjects.git?path=/Packages/WorldObjects#beta`) and the Core WorldObjects needs, 1.1.9 or newer and below 3.0.0 (`https://github.com/Spellbound-Studios/Core.git?path=/Packages/Core#dev`), on Unity 6000.3 or newer, the floor WorldObjects declares.
+- A project that installs Modifiers installs Core 1.1.9 or newer and below 3.0.0, on Unity 6000.3 or newer, and WorldObjects only where it uses `StatData`. The README lists both git URLs.
+- `StatData` moves to the `Spellbound.Modifiers.WorldObjects` assembly and namespace, which compiles only when WorldObjects 0.x and Core are installed. The runtime assembly references Core alone. Add `using Spellbound.Modifiers.WorldObjects;` where `StatData` is used.
+- Every assembly defines `SPELLBOUND_CORE` on Core 1.1.9 or newer and below 3.0.0 and compiles only with it.
+- The samples move to `Samples~/CombatDemo` and are imported as the Combat Demo sample from the Package Manager.
+- `package.json` declares Unity 6000.3 and the studio as author.
 
 ### Removed
 - `StatData.Context`. Use `StatChangeReason`.

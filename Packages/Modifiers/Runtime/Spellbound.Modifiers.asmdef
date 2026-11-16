@@ -2,7 +2,6 @@
   "name": "Spellbound.Modifiers",
   "rootNamespace": "",
   "references": [
-    "Spellbound.WorldObjects",
     "GUID:c14a5db03514b8d4ba10b621ed3627d5"
   ],
   "includePlatforms": [],
@@ -11,7 +10,15 @@
   "overrideReferences": false,
   "precompiledReferences": [],
   "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
+  "defineConstraints": [
+    "SPELLBOUND_CORE"
+  ],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    }
+  ],
   "noEngineReferences": false
 }

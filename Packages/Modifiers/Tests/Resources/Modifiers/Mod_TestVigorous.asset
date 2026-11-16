@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d6311429f1fda449e97fb960ee9a47, type: 3}
+  m_Name: Mod_TestVigorous
+  m_EditorClassIdentifier: 
+  guid: 0b5a08991510bef4ea77fc575264a45f
+  hash: 141902303
+  modifierName: test_vigorous
+  displayName: Vigorous
+  description: +30-60 max health
+  icon: {fileID: 0}
+  contributions:
+  - rid: 1000
+  references:
+    version: 2
+    RefIds:
+    - rid: 1000
+      type: {class: SingleStatContribution, ns: Spellbound.Modifiers, asm: Spellbound.Modifiers}
+      data:
+        stat: {fileID: 11400000, guid: 8e0b111a3c9580d439d3db456618aedc, type: 2}
+        contributionType: 0
+        amount:
+          rid: 1001
+    - rid: 1001
+      type: {class: RolledMagnitude, ns: Spellbound.Modifiers, asm: Spellbound.Modifiers}
+      data:
+        min: 30
+        max: 60
+        step: 5

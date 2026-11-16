@@ -4,8 +4,8 @@ using NUnit.Framework;
 
 namespace Spellbound.Modifiers.Tests {
     public class StatTemplateTests {
-        private static StatId Armor => new(StatRegistry.GetHash("sample_armor"));
-        private static StatId Health => new(StatRegistry.GetHash("sample_health"));
+        private static StatId Armor => new(StatRegistry.GetHash("test_armor"));
+        private static StatId Health => new(StatRegistry.GetHash("test_health"));
 
         private static BaseStat Base(string statName, float value) =>
                 new() { stat = StatRegistry.GetDefinition(statName), value = value };
@@ -13,8 +13,8 @@ namespace Spellbound.Modifiers.Tests {
         [Test]
         public void ApplyTo_SetsBases() {
             var template = Definitions.CreateTemplate(new[] {
-                Base("sample_armor", 10f),
-                Base("sample_health", 120f)
+                Base("test_armor", 10f),
+                Base("test_health", 120f)
             });
 
             var target = new Modifiable();
@@ -29,7 +29,7 @@ namespace Spellbound.Modifiers.Tests {
             using (new LogMute()) {
                 var template = Definitions.CreateTemplate(new[] {
                     new BaseStat { stat = null, value = 5f },
-                    Base("sample_armor", 10f)
+                    Base("test_armor", 10f)
                 });
 
                 var target = new Modifiable();
@@ -41,8 +41,8 @@ namespace Spellbound.Modifiers.Tests {
 
         [Test]
         public void Modifiers_ExposesAuthoredDefinitions() {
-            var thickHide = ModifierRegistry.GetDefinition("sample_thick_hide");
-            var vigorous = ModifierRegistry.GetDefinition("sample_vigorous");
+            var thickHide = ModifierRegistry.GetDefinition("test_thick_hide");
+            var vigorous = ModifierRegistry.GetDefinition("test_vigorous");
             var template = Definitions.CreateTemplate(new BaseStat[0], thickHide, vigorous);
 
             Assert.AreEqual(2, template.Modifiers.Count);
@@ -52,8 +52,8 @@ namespace Spellbound.Modifiers.Tests {
 
         [Test]
         public void SpawnFlow_BasesPlusModifiers_Compose() {
-            var template = Definitions.CreateTemplate(new[] { Base("sample_armor", 10f) },
-                ModifierRegistry.GetDefinition("sample_thick_hide"));
+            var template = Definitions.CreateTemplate(new[] { Base("test_armor", 10f) },
+                ModifierRegistry.GetDefinition("test_thick_hide"));
 
             var target = new Modifiable();
             template.ApplyTo(target);
