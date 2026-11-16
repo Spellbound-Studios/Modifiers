@@ -4,12 +4,6 @@ using System;
 using Spellbound.Core.Packing;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// The instance record of a rolled <see cref="ModifierGrantSet"/>: inline lines persist as stat-keyed
-    /// baked rolls whose route back is the owning instance; named lines persist as
-    /// <see cref="RolledModifier"/>s whose route back is the modifier hash. Save or send this next to the
-    /// owner's other instance data and hydrate through <see cref="ModifierGrantSet.Apply"/>.
-    /// </summary>
     [Serializable]
     public struct RolledGrants : IPacker {
         public BakedRoll[] baked;

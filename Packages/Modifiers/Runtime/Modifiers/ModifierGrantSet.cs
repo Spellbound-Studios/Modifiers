@@ -6,15 +6,6 @@ using Spellbound.Core.Logging;
 using UnityEngine;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// The one authored list for putting modifiers on a thing. Each grant is a named
-    /// <see cref="ModifierDefinition"/> or an inline contribution, chosen per entry in the inspector.
-    /// <see cref="Roll"/> once at the owning instance's creation, persist the <see cref="RolledGrants"/> with
-    /// that instance, and hydrate back through <see cref="Apply"/>; or <see cref="RollAndApply"/> for
-    /// fire-and-forget. Everything lands under one source id, so RemoveSource strips the whole set.
-    /// Apply's sourceId is authoritative: named records are re-keyed to it before applying; a record's
-    /// packed id matters only when applied standalone (StatData, TimedModifierSet).
-    /// </summary>
     [Serializable]
     public sealed class ModifierGrantSet {
         [SerializeReference] private List<ModifierGrant> grants = new();
@@ -45,7 +36,7 @@ namespace Spellbound.Modifiers {
                     continue;
 
                 Log.Error($"ModifierGrantSet: two rolled contributions on stat '{new StatId(baked[i].statHash)}'. " +
-                          "Rolled values are keyed by stat — keeping the first roll; give each a distinct stat.");
+                          "Rolled values are keyed by stat, keeping the first roll; give each a distinct stat.");
                 baked.RemoveAt(i--);
             }
 
@@ -56,7 +47,7 @@ namespace Spellbound.Modifiers {
                     continue;
 
                 Log.Error($"ModifierGrantSet: modifier '{modifiers[i]}' is granted twice. Rolled records are " +
-                          "keyed by modifier hash — keeping the first roll; grant each definition once.");
+                          "keyed by modifier hash, keeping the first roll; grant each definition once.");
                 modifiers.RemoveAt(i--);
             }
 

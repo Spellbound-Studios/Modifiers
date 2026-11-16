@@ -22,9 +22,6 @@ namespace Spellbound.Modifiers {
             MarkChanged(stat);
         }
 
-        /// <summary>
-        /// Mutates the base stat forever. This was implemented as a solution for experience gain.
-        /// </summary>
         public float AddToBase(StatId stat, float delta) {
             _base.TryGetValue(stat, out var current);
             var next = (long)current + StatSettings.ToInternal(delta);
