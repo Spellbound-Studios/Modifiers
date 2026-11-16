@@ -205,8 +205,20 @@ namespace Spellbound.Modifiers.Tests {
         }
 
         [Test]
-        public void ResetToMax_WithMaxAtOrBelowMin_ReadsMinAndDepletesOnce() {
+        public void ResetToMax_WithMaxBelowMin_ReadsMinAndDepletesOnce() {
             var pool = new ResourcePool(OwnerWithHealth(5f), Health, 10f);
+            var depletions = 0;
+            pool.Depleted += _ => depletions++;
+
+            pool.ResetToMax();
+
+            Assert.AreEqual(10f, pool.Current);
+            Assert.AreEqual(1, depletions);
+        }
+
+        [Test]
+        public void ResetToMax_WithMaxEqualToMin_ReadsMinAndDepletesOnce() {
+            var pool = new ResourcePool(OwnerWithHealth(10f), Health, 10f);
             var depletions = 0;
             pool.Depleted += _ => depletions++;
 
