@@ -5,7 +5,7 @@
 ### Added
 - `StatDefinition` and `ModifierDefinition` implement Core's `IAuthoredDefinition`. Findings: `modifiers.stat-name-empty`, `modifiers.modifier-name-empty`, `modifiers.contributions-empty`, `modifiers.contribution-null`, `modifiers.contribution-invalid`.
 - `StatDefinitionPreviewer` and `ModifierDefinitionPreviewer` show a summary, the icon and one line per contribution in Core's authoring tools.
-- `ResourcePool`: a current value under a `Modifiable`'s value of one stat, clamped to `[Min, Max]` and clamped again when the owner's value of the stat changes. `Changed` and `Depleted` pass the pool; `Depleted` fires once each time the value reaches `Min`. `Dispose` stops listening to the owner.
+- `ResourcePool`: a current value under a `Modifiable`'s value of one stat, clamped to `[Min, Max]` and clamped again when the owner's value of the stat changes. A new pool starts at `Max` (at `Min` when `Max` is below `Min`), and `Current` never reads under `Min`. `Changed` and `Depleted` pass the pool; `Depleted` fires once each time the value reaches `Min`, including a `ResetToMax` that lands on `Min`. `Dispose` stops listening to the owner.
 
 ### Changed
 - `StatData` implements `IInstanceData` from the WorldObjects package (`Spellbound.WorldObjects`): `Empty()`, `RaiseChanged(in InstanceView, IInstancePresenter)` and `RaiseResolve(InstanceWriter, in InstanceView)` replace `GetEmptyData`, `InvokeChangeCallback` and `InvokeResolveCallback`, and the runtime assembly references `Spellbound.WorldObjects` in place of `Spellbound.Core.WorldObjects`. The packed bytes are unchanged.

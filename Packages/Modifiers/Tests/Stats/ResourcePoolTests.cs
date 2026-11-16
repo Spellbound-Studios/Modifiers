@@ -183,5 +183,37 @@ namespace Spellbound.Modifiers.Tests {
             Assert.AreEqual(40f, pool.Drain(70f));
             Assert.AreEqual(0f, pool.Current);
         }
+
+        [Test]
+        public void MaxBelowMin_CurrentReadsMin() {
+            var owner = OwnerWithHealth(100f);
+            var pool = new ResourcePool(owner, Health, 10f);
+            pool.ResetToMax();
+
+            owner.Stats.SetBase(Health, 4f);
+
+            Assert.AreEqual(10f, pool.Current);
+            Assert.IsTrue(pool.IsDepleted);
+        }
+
+        [Test]
+        public void NewPool_ReadsMax() {
+            var pool = new ResourcePool(OwnerWithHealth(80f), Health, 0f);
+
+            Assert.AreEqual(80f, pool.Current);
+            Assert.IsFalse(pool.IsDepleted);
+        }
+
+        [Test]
+        public void ResetToMax_WithMaxAtOrBelowMin_ReadsMinAndDepletesOnce() {
+            var pool = new ResourcePool(OwnerWithHealth(5f), Health, 10f);
+            var depletions = 0;
+            pool.Depleted += _ => depletions++;
+
+            pool.ResetToMax();
+
+            Assert.AreEqual(10f, pool.Current);
+            Assert.AreEqual(1, depletions);
+        }
     }
 }

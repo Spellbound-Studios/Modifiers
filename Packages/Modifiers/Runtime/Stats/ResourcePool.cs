@@ -18,6 +18,7 @@ namespace Spellbound.Modifiers {
             _owner = owner ?? throw new ArgumentNullException(nameof(owner));
             Stat = stat;
             Min = min;
+            _current = ClampToRange(Max);
             _owner.Changed += HandleOwnerStatChanged;
             _subscribed = true;
         }
@@ -26,28 +27,29 @@ namespace Spellbound.Modifiers {
 
         public float Min { get; }
 
-        public float Current => Mathf.Min(_current, Max);
+        public float Current => ClampToRange(_current);
 
         public float Max => _owner.GetValue(Stat);
 
         public bool IsDepleted => Current <= Min;
 
         public void ResetToMax() {
-            _current = Max;
+            _current = ClampToRange(Max);
             _depletionArmed = true;
             NotifyChange();
+            UpdateDepletion(Current);
         }
 
         public float SetCurrent(float value) {
             var before = Current;
-            _current = Mathf.Clamp(value, Min, Max);
+            _current = ClampToRange(value);
 
             return FinishWrite(before);
         }
 
         public float Adjust(float delta) {
             var before = Current;
-            _current = Mathf.Clamp(Current + delta, Min, Max);
+            _current = ClampToRange(Current + delta);
 
             return FinishWrite(before);
         }
@@ -80,10 +82,12 @@ namespace Spellbound.Modifiers {
             if (changedStat.Hash != Stat.Hash)
                 return;
 
-            _current = Mathf.Clamp(_current, Min, Max);
+            _current = ClampToRange(_current);
             NotifyChange();
             UpdateDepletion(Current);
         }
+
+        private float ClampToRange(float value) => Mathf.Max(Min, Mathf.Min(value, Max));
 
         private void NotifyChange() {
             var snapshot = new Vector2(Current, Max);
