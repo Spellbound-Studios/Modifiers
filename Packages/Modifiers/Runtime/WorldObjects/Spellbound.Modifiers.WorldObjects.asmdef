@@ -1,0 +1,32 @@
+{
+  "name": "Spellbound.Modifiers.WorldObjects",
+  "rootNamespace": "Spellbound.Modifiers.WorldObjects",
+  "references": [
+    "Spellbound.Modifiers",
+    "Spellbound.Core",
+    "Spellbound.WorldObjects"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [
+    "SPELLBOUND_CORE",
+    "SPELLBOUND_WORLDOBJECTS"
+  ],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.worldobjects",
+      "expression": "[0.0.0,1.0.0)",
+      "define": "SPELLBOUND_WORLDOBJECTS"
+    }
+  ],
+  "noEngineReferences": false
+}

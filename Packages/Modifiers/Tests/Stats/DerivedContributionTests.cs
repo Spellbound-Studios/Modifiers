@@ -4,8 +4,8 @@ using NUnit.Framework;
 
 namespace Spellbound.Modifiers.Tests {
     public class DerivedContributionTests {
-        private static StatId Armor => new(StatRegistry.GetHash("sample_armor"));
-        private static StatId Health => new(StatRegistry.GetHash("sample_health"));
+        private static StatId Armor => new(StatRegistry.GetHash("test_armor"));
+        private static StatId Health => new(StatRegistry.GetHash("test_health"));
 
         [Test]
         public void Derived_ScalesWithResolvedSource() {
@@ -130,8 +130,8 @@ namespace Spellbound.Modifiers.Tests {
 
         [Test]
         public void RolledModifier_AppliesAndRemovesDerivedRows() {
-            var armorDef = StatRegistry.GetDefinition("sample_armor");
-            var healthDef = StatRegistry.GetDefinition("sample_health");
+            var armorDef = StatRegistry.GetDefinition("test_armor");
+            var healthDef = StatRegistry.GetDefinition("test_health");
             var definition = Definitions.Create(
                 Definitions.Range(armorDef, ContributionType.Flat, 0.05f, 0.05f, sourceStat: healthDef));
 
@@ -156,7 +156,7 @@ namespace Spellbound.Modifiers.Tests {
             target.Stats.SetBase(Health, 200f);
             var buffs = new TimedModifierSet(target);
 
-            var definition = ModifierRegistry.GetDefinition("sample_bulwark");
+            var definition = ModifierRegistry.GetDefinition("test_bulwark");
             var rolled = definition.Roll(new System.Random(7), 42u);
             buffs.Apply(rolled, 5f);
 

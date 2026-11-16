@@ -143,9 +143,10 @@ namespace Spellbound.Modifiers.Samples {
             }
 
             if (!player.gameObject.scene.IsValid()) {
-                Debug.LogError($"[CombatDemo] 'player' ({player.name}) is a PREFAB ASSET, not a scene instance — " +
+                Debug.LogError($"[CombatDemo] 'player' ({player.name}) is a PREFAB ASSET, not a scene instance: " +
                                "its Awake never runs, it's invisible, and reflect/health silently no-op against it. " +
-                               "Drag the player from the HIERARCHY into the Player field, not the prefab from the Project.");
+                               "Drag the player from the HIERARCHY into the Player field, " +
+                               "not the prefab from the Project.");
 
                 return;
             }

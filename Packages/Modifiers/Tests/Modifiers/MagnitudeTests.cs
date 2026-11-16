@@ -5,8 +5,8 @@ using NUnit.Framework;
 
 namespace Spellbound.Modifiers.Tests {
     public class MagnitudeTests {
-        private static StatDefinition ArmorDef => StatRegistry.GetDefinition("sample_armor");
-        private static StatDefinition HealthDef => StatRegistry.GetDefinition("sample_health");
+        private static StatDefinition ArmorDef => StatRegistry.GetDefinition("test_armor");
+        private static StatDefinition HealthDef => StatRegistry.GetDefinition("test_health");
         private static StatId Armor => new(ArmorDef.Hash);
         private static StatId Health => new(HealthDef.Hash);
 

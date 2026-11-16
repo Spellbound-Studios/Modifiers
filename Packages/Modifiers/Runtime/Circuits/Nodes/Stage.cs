@@ -4,10 +4,6 @@ using System;
 using System.Collections.Generic;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// A named, mutable insertion point in a circuit; sources grant nodes into it and revoke them by source id.
-    /// Children run in ascending priority order, ties in grant order.
-    /// </summary>
     public sealed class Stage : Node {
         private static readonly Comparison<Grant> GrantOrder = (a, b) =>
                 a.Priority != b.Priority ? a.Priority.CompareTo(b.Priority) : a.Sequence.CompareTo(b.Sequence);

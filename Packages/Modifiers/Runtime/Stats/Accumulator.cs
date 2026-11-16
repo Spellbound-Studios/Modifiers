@@ -4,12 +4,12 @@ using System;
 
 namespace Spellbound.Modifiers {
     public struct Accumulator {
-        private int _flat;         // Σ Flat, internal units
-        private int _increased;    // Σ Increased, internal units (Precision == 100%)
-        private long _moreProduct; // ∏ (1 + More), scaled by Precision
+        private int _flat;
+        private int _increased;
+        private long _moreProduct;
         private bool _hasMore;
         private bool _hasOverride;
-        private int _override; // internal units
+        private int _override;
 
         public void AddFlat(int internalValue) => _flat += internalValue;
 

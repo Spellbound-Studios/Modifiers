@@ -101,15 +101,16 @@ namespace Spellbound.Modifiers {
                 foreach (var definition in Resources.LoadAll<ModifierDefinition>(ResourceFolder)) {
                     if (Registry.Contains(definition.Hash)) {
                         throw new InvalidOperationException(
-                            $"Modifier hash collision: '{definition.ModifierName}' (asset '{definition.name}') collides " +
-                            $"with an already-registered modifier at hash {definition.Hash}. Regenerate one asset's " +
-                            "GUID to resolve.");
+                            $"Modifier hash collision: '{definition.ModifierName}' (asset '{definition.name}') " +
+                            $"collides with an already-registered modifier at hash {definition.Hash}. Regenerate " +
+                            "one asset's GUID to resolve.");
                     }
 
                     if (!NameIndex.TryAdd(definition.ModifierName, definition)) {
                         throw new InvalidOperationException(
                             $"Duplicate modifier name: '{definition.ModifierName}' (asset '{definition.name}') is " +
-                            "already registered by another ModifierDefinition. Modifier names must be unique — rename one.");
+                            "already registered by another ModifierDefinition. Modifier names must be unique. " +
+                            "Rename one.");
                     }
 
                     var specs = definition.Contributions;
@@ -146,8 +147,9 @@ namespace Spellbound.Modifiers {
 
             if (!seen.Add(stat.Hash)) {
                 throw new InvalidOperationException(
-                    $"Modifier '{definition.ModifierName}' (asset '{definition.name}') has two rolled contributions on " +
-                    $"stat '{stat.StatName}'. Rolled values are keyed by stat and would collide — give each a distinct stat.");
+                    $"Modifier '{definition.ModifierName}' (asset '{definition.name}') has two rolled " +
+                    $"contributions on stat '{stat.StatName}'. Rolled values are keyed by stat and would " +
+                    "collide. Give each a distinct stat.");
             }
         }
 

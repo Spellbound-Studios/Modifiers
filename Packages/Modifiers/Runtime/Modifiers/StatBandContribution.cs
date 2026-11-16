@@ -5,11 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// One mod line spanning the two ends of a range across two stats — "adds (1-3) to (3-5) fire damage"
-    /// lands the low end on minimum fire damage and the high end on maximum. Each end takes any magnitude,
-    /// so bands compose with rolls and derived scaling ("5 to 10 added fire damage per 25 strength").
-    /// </summary>
     [Serializable]
     [SerializeReferenceLabel("Stat Band")]
     public sealed class StatBandContribution : ContributionSpecification {
@@ -25,7 +20,8 @@ namespace Spellbound.Modifiers {
         [SerializeReference, Tooltip("The high end's amount.")]
         private Magnitude highAmount;
 
-        [SerializeField, Tooltip("Flat adds raw amounts. Increased / More scale by a percent. Override forces the values. Applies to both ends.")]
+        [SerializeField, Tooltip("Flat adds raw amounts. Increased / More scale by a percent. " +
+                                 "Override forces the values. Applies to both ends.")]
         private ContributionType contributionType;
 
         [SerializeField, Tooltip("Never let the high end bake below the low end.")]

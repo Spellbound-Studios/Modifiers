@@ -1,9 +1,6 @@
 // Copyright 2026 Spellbound Studio Inc.
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// True when any child condition is met.
-    /// </summary>
     public sealed class Any : Condition {
         private readonly Condition[] _conditions;
 

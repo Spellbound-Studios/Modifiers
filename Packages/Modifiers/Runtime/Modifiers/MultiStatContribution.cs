@@ -5,21 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// One mod line whose single amount lands on several stats at once — "+10-20 to all resistances" rolls
-    /// ONCE and every listed stat receives that same value. Distinct from authoring one line per stat, which
-    /// would roll each stat independently.
-    /// </summary>
     [Serializable]
     [SerializeReferenceLabel("Multiple Stats")]
     public sealed class MultiStatContribution : ContributionSpecification {
         [SerializeField, Tooltip("Every stat in this list receives the same amount.")]
         private List<StatDefinition> stats = new();
 
-        [SerializeField, Tooltip("Flat adds a raw amount. Increased / More scale by a percent. Override forces the value. Applies to every listed stat.")]
+        [SerializeField, Tooltip("Flat adds a raw amount. Increased / More scale by a percent. " +
+                                 "Override forces the value. Applies to every listed stat.")]
         private ContributionType contributionType;
 
-        [SerializeReference, Tooltip("How the shared amount is decided. A roll happens once; every stat gets the same value.")]
+        [SerializeReference, Tooltip("How the shared amount is decided. " +
+                                     "A roll happens once; every stat gets the same value.")]
         private Magnitude amount;
 
         public IReadOnlyList<StatDefinition> Stats => stats;

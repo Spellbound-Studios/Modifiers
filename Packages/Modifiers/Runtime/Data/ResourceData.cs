@@ -4,22 +4,12 @@ using System;
 using Spellbound.Core.Packing;
 
 namespace Spellbound.Modifiers {
-    /// <summary>
-    /// ResourceData is intended to be the savable and networkable data structure for your resource types.
-    /// </summary>
     public struct ResourceData : IPacker {
         public uint statHash;
         public float max;
         public float min;
         public float current;
 
-        /// <summary>
-        /// Overload ctor for full customization of a resource data type.
-        /// </summary>
-        /// <param name="statHash"></param>
-        /// <param name="max"></param>
-        /// <param name="min"></param>
-        /// <param name="current"></param>
         public ResourceData(uint statHash, float max, float min, float current) {
             this.statHash = statHash;
             this.max = max;
@@ -27,11 +17,6 @@ namespace Spellbound.Modifiers {
             this.current = current;
         }
 
-        /// <summary>
-        /// Overload ctor intended to be used for standard resources like: health, mana, etc.
-        /// </summary>
-        /// <param name="statHash"></param>
-        /// <param name="max"></param>
         public ResourceData(uint statHash, float max) {
             this.statHash = statHash;
             this.max = max;
